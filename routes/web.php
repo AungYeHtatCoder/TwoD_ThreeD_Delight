@@ -25,6 +25,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -49,11 +51,17 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'App\Http\Co
     Route::resource('twod-records', TwoDLotteryController::class);
     Route::resource('tow-d-win-number', TwoDWinnerController::class);
     Route::resource('tow-d-morning-number', TwoDMorningController::class);
-Route::get('/two-d-morning-winner', [App\Http\Controllers\Admin\TwoDMorningController::class, 'TwoDMorningWinner'])->name('morningWinner');
+    Route::get('/two-d-morning-winner', [App\Http\Controllers\Admin\TwoDMorningController::class, 'TwoDMorningWinner'])->name('morningWinner');
 
 Route::get('/two-d-evening-number', [App\Http\Controllers\Admin\TwoDMorningController::class, 'EveningTwoD'])->name('eveningNumber');
 Route::get('/two-d-evening-winner', [App\Http\Controllers\Admin\TwoDMorningController::class, 'TwoDEveningWinner'])->name('eveningWinner');
 //SendToAccBalance update 
 // Route::put('/send-to-acc-balance', [App\Http\Controllers\Admin\TwoDMorningController::class, 'SendToAccBalanceUpdate'])->name('sendToAccBalance');
+
+Route::get('profile/fill_money', [ProfileController::class, 'fillmoney']);
+
+
+
+
 
 });
