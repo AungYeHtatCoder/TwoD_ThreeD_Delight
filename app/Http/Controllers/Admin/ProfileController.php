@@ -223,4 +223,10 @@ class ProfileController extends Controller
 
         return $path . '/' . $image->getClientOriginalName();
     }
+
+    public function fillmoney()
+    {
+        return view('admin.profile.fill_money');
+    }
+
 }
