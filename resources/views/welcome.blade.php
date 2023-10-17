@@ -6,13 +6,14 @@
         background-color: #007bff;  
         color: white;  
         border-radius: 50%;
-        -moz-border-radius: 50%;
-        -webkit-border-radius: 50%;
-        
         width: 2.5rem;
         height: 2.5rem;
-        line-height: 2.5rem;
-
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid #007bff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
     } */
 .digit.selected {
  background-color: #007bff;
@@ -85,16 +86,25 @@
  padding: 2em;
 }
 
-/* .digit {
-    border: 3px solid gold;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
-    padding: 10px 0;
-    border-radius: 8px; 
-    font-size: 20px; 
-    font-weight: bold; 
-    transition: all 0.3s ease; 
-    cursor: pointer; 
-} */
+    @keyframes goldAnimate {
+        0% {
+            border-color: #ffd700;
+        }
+        50% {
+            border-color: #ffcc00;
+        }
+        100% {
+            border-color: #ffdb58;
+        }
+    } */
+        /* General styles */
+        .beauty {
+            font-family: 'Arial', sans-serif;
+            /* Change as per your preference */
+            background: linear-gradient(45deg, #f3f4f6, #ddd);
+            /* Light gradient background */
+            padding: 2em;
+        }
 
 .digit:hover {
  transform: translateY(-5px);
