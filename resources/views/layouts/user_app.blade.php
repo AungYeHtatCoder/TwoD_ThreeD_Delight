@@ -5,7 +5,7 @@
  <!-- Navbar -->
  @include('layouts.user_navbar')
  @include('layouts.user_header')
- @include('layouts.show_user_count')
+ {{-- @include('layouts.show_user_count') --}}
  <section>
   <div class="container">
    @yield('content')
