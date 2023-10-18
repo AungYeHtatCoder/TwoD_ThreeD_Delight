@@ -182,4 +182,8 @@ public function index()
     {
         //
     }
+
+    public function userProfile(){
+        return view('user_profile');
+    }
 }

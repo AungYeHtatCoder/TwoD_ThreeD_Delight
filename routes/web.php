@@ -31,6 +31,7 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/', [App\Http\Controllers\User\WelcomeController::class, 'index'])->name('welcome');
+Route::get('/user_profile', [App\Http\Controllers\User\WelcomeController::class, 'userProfile']);
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'App\Http\Controllers\Admin', 'middleware' => ['auth']], function () {
     // Permissions
     Route::delete('permissions/destroy', [PermissionController::class, 'massDestroy'])->name('permissions.massDestroy');

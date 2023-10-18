@@ -34,18 +34,18 @@
             /* Spacing between digits */
         }
 
-        .digit {
-            border: 3px solid gold;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            padding: 10px 0;
-            border-radius: 8px;
-            font-size: 20px;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            margin: 0 1px;
-            /* Spacing between digits */
-        }
+.digit {
+ border: 3px solid #7A316F;
+ box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+ padding: 10px 0;
+ border-radius: 8px;
+ font-size: 20px;
+ font-weight: bold;
+ transition: all 0.3s ease;
+ cursor: pointer;
+ margin: 0 5px;
+ /* Spacing between digits */
+}
 
         /* .digit.selected {
         background-color: #007bff;
@@ -87,22 +87,17 @@
             padding: 2em;
         }
 
-        @keyframes goldAnimate {
-            0% {
-                border-color: #ffd700;
-            }
-
-            50% {
-                border-color: #ffcc00;
-            }
-
-            100% {
-                border-color: #ffdb58;
-            }
+    @keyframes goldAnimate {
+        0% {
+            border-color: #ffd700;
         }
-
-        */
-
+        50% {
+            border-color: #ffcc00;
+        }
+        100% {
+            border-color: #ffdb58;
+        }
+    } */
         /* General styles */
         .beauty {
             font-family: 'Arial', sans-serif;
@@ -133,76 +128,62 @@
     </style>
 @endsection
 @section('content')
-    <div class="row align-items-center">
-        <div class="col-lg-10 ms-auto">
-            <div class="row justify-content-center">
-                <div class="col-md-12">
-                    @if (session('message'))
-                                <div class="alert alert-success text-white" role="alert">
-                                    <strong>Success!</strong> {{ session('message') }}
-                                </div>
-                            @endif
-                            @if (session('error'))
-                                <div class="alert alert-danger text-white" role="alert">
-                                    <strong>Danger!</strong> {{ session('error') }}
-                                </div>
-                            @endif
-                    <div class="info">
-                        <div class="icon icon-sm">
-                            {{-- 1 --}}
-                            
-                        </div>
-                        <h5 class="font-weight-bolder mt-3">Delight 2D
-                            <span id="userBalance"
-                                data-balance="{{ Auth::user()->balance }}">{{ Auth::user()->balance }}</span>
-                        </h5>
+<div class="row align-items-center">
+ <div class="col-lg-10 ms-auto">
+  <div class="row justify-content-center">
+   <div class="col-md-12">
+    <div class="info">
+     <div class="icon icon-sm">
+      {{-- 1 --}}
+     </div>
+     <h5 class="font-weight-bolder mt-3">Delight 2D
+      <span id="userBalance" data-balance="{{ Auth::user()->balance }}">{{ Auth::user()->balance }}</span>
+     </h5>
 
-                        @foreach ($twoDigits->chunk(5) as $chunk)
-                            <div class="row my-2 beauty">
-                                @foreach ($chunk as $digit)
-                                    @php
-                                        $totalBetAmountForTwoDigit = DB::table('lottery_two_digit_pivot')
-                                            ->where('two_digit_id', $digit->id)
-                                            ->sum('sub_amount');
-                                    @endphp
+     @foreach($twoDigits->chunk(5) as $chunk)
+     <div class="row my-2 beauty">
+      @foreach($chunk as $digit)
+      @php
+      $totalBetAmountForTwoDigit = DB::table('lottery_two_digit_pivot')
+      ->where('two_digit_id', $digit->id)
+      ->sum('sub_amount');
+      @endphp
 
-                                    @if ($totalBetAmountForTwoDigit < 5000)
-                                        <div class="col-2 text-center digit"
-                                            style="background-color: {{ 'javascript:getRandomColor();' }}"
-                                            onclick="selectDigit('{{ $digit->two_digit }}', this)">
-                                            {{ $digit->two_digit }}
-                                        </div>
-                                    @else
-                                        <div class="col-2 text-center digit disabled"
-                                            style="background-color: {{ 'javascript:getRandomColor();' }}"
-                                            onclick="alert('This two digit\'s amount limit is full.')">
-                                            {{ $digit->two_digit }}
-                                        </div>
-                                    @endif
-                                @endforeach
-                            </div>
-                        @endforeach
+      @if($totalBetAmountForTwoDigit < 5000) <div class="col-2 text-center digit"
+       style="background-color: {{ 'javascript:getRandomColor();' }}"
+       onclick="selectDigit('{{ $digit->two_digit }}', this)">
+       {{ $digit->two_digit }}
+     </div>
+     @else
+     <div class="col-2 text-center digit disabled" style="background-color: {{ 'javascript:getRandomColor();' }}"
+      onclick="alert('This two digit\'s amount limit is full.')">
+      {{ $digit->two_digit }}
+     </div>
+     @endif
+     @endforeach
+    </div>
+    @endforeach
 
-                        <form action="{{ route('admin.two-d-lotteries.store') }}" method="post">
-                            @csrf
+    <form action="{{ route('admin.two-d-lotteries.store') }}" method="post">
+     @csrf
 
-                            <input type="text" name="selected_digits" id="selected_digits" class="form-control">
+     <input type="text" name="selected_digits" id="selected_digits" class="form-control">
 
-                            <div id="amountInputs"></div>
-                            <!-- Add this right above your PlayNow & Close buttons in the modal-body -->
-                            <div class="form-group mb-3">
-                                <label for="totalAmount">Total Amount</label>
-                                <input type="text" id="totalAmount" name="totalAmount" class="form-control" readonly>
-                            </div>
-                            <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
-                            {{-- PlayNow & Close buttons --}}
-                            <div class="modal-footer">
-                                <button type="submit" class="btn btn-primary">playNow</button>
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+     <div id="amountInputs"></div>
+     <!-- Add this right above your PlayNow & Close buttons in the modal-body -->
+     <div class="form-group mb-3">
+      <label for="totalAmount">Total Amount</label>
+      <input type="text" id="totalAmount" name="totalAmount" class="form-control" readonly>
+     </div>
+     <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+     {{-- PlayNow & Close buttons --}}
+     <div class="modal-footer">
+      <button type="submit" class="btn btn-primary">playNow</button>
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+     </div>
+    </form>
+   </div>
+  </div>
 
             </div>
 
@@ -260,15 +241,15 @@
 
             // Check if user balance is less than total amount
             if (userBalance < total) {
-                //alert('Your balance is not enough to play two digit.');
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Your balance is not enough to play two digit. - သင်၏လက်ကျန်ငွေ မလုံလောက်ပါ - ကျေးဇူးပြု၍ ငွေဖြည့်ပါ။',
-                    footer: '<a href="{{ route('admin.profiles.index') }}" style="background-color: #007BFF; color: #FFFFFF; padding: 5px 10px; border-radius: 5px; text-decoration: none;">Fill Balance - ငွေဖြည့်သွင်းရန် နိုပ်ပါ </a>'
-                });
-                return; // Exit the function to prevent further changes 
-            }
+    //alert('Your balance is not enough to play two digit.');
+    Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Your balance is not enough to play two digit. - သင်၏လက်ကျန်ငွေ မလုံလောက်ပါ - ကျေးဇူးပြု၍ ငွေဖြည့်ပါ။',
+        footer: '<a href="{{ route('admin.profiles.index') }}" style="background-color: #007BFF; color: #FFFFFF; padding: 5px 10px; border-radius: 5px; text-decoration: none;">Fill Balance - ငွေဖြည့်သွင်းရန် နိုပ်ပါ </a>'
+    });
+    return; // Exit the function to prevent further changes 
+}
 
 
 
@@ -292,73 +273,73 @@
         }
         // sweet alert
         document.querySelector('form').addEventListener('submit', function(event) {
-            event.preventDefault(); // prevent the form from submitting immediately
+    event.preventDefault(); // prevent the form from submitting immediately
 
-            Swal.fire({
-                title: 'Are you sure- ထိုးမှာလား ?',
-                text: 'You are about to submit your lottery choices.',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonText: 'Yes, submit it! - ထိုးမယ်!',
-                cancelButtonText: 'No, cancel! - မထိုးပါ!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    // If the user clicked "Yes", submit the form
-                    event.target.submit();
-                }
-            });
-        });
+    Swal.fire({
+        title: 'Are you sure- ထိုးမှာလား ?',
+        text: 'You are about to submit your lottery choices.',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, submit it! - ထိုးမယ်!',
+        cancelButtonText: 'No, cancel! - မထိုးပါ!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // If the user clicked "Yes", submit the form
+            event.target.submit();
+        }
+    });
+});
     </script>
     <script>
-        $(document).ready(function() {
-            function fetchData() {
-                $.ajax({
-                    url: "/",
-                    type: "GET",
-                    dataType: "json",
-                    success: function(data) {
-                        // Update live data
-                        updateLiveData(data.live);
+    $(document).ready(function() {
+        function fetchData() {
+            $.ajax({
+                url: "/",
+                type: "GET",
+                dataType: "json",
+                success: function(data) {
+                    // Update live data
+                    updateLiveData(data.live);
 
-                        // Update results
-                        updateResultsData(data.result);
-                    }
-                });
-            }
-
-            function updateLiveData(liveData) {
-                // Helper function to update text and possibly animate the update
-                function updateAndAnimate(elementId, newValue) {
-                    const element = $(elementId);
-                    if (element.text() !== newValue) {
-                        element.text(newValue).addClass('activeUpdate');
-                        setTimeout(function() {
-                            element.removeClass('activeUpdate');
-                        }, 300);
-                    }
+                    // Update results
+                    updateResultsData(data.result);
                 }
+            });
+        }
 
-                updateAndAnimate("#liveSet", liveData.set);
-                updateAndAnimate("#liveValue", liveData.value);
-                $("#liveTime").text(liveData.time); // Always update time
+        function updateLiveData(liveData) {
+            // Helper function to update text and possibly animate the update
+            function updateAndAnimate(elementId, newValue) {
+                const element = $(elementId);
+                if (element.text() !== newValue) {
+                    element.text(newValue).addClass('activeUpdate');
+                    setTimeout(function() {
+                        element.removeClass('activeUpdate');
+                    }, 300);
+                }
             }
 
-            function updateResultsData(results) {
-                let resultsHtml = '';
-                results.forEach(function(result) {
-                    resultsHtml += `
+            updateAndAnimate("#liveSet", liveData.set);
+            updateAndAnimate("#liveValue", liveData.value);
+            $("#liveTime").text(liveData.time);  // Always update time
+        }
+
+        function updateResultsData(results) {
+            let resultsHtml = '';
+            results.forEach(function(result) {
+                resultsHtml += `
                     <p>Set: ${result.set}</p>
                     <p>Value: ${result.value}</p>
                     <p>Open Time: ${result.open_time}</p>
                     <hr>
                 `;
-                });
+            });
 
-                $("#resultsData").html(resultsHtml);
-            }
+            $("#resultsData").html(resultsHtml);
+        }
 
-            fetchData(); // Initial data fetch
-            setInterval(fetchData, 1000); // Fetch data every 3 seconds
-        });
-    </script>
+        fetchData();  // Initial data fetch
+        setInterval(fetchData, 1000);  // Fetch data every 3 seconds
+    });
+</script>
 @endsection
