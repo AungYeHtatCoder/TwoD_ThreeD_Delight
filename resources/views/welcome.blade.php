@@ -107,7 +107,8 @@
 .beauty {
  font-family: 'Arial', sans-serif;
  /* Change as per your preference */
- background: linear-gradient(45deg, #22668D, #ddd);
+ background: linear-gradient(45deg, #f3f4f6, #ddd);
+ /* background: #176B87; */
  /* Light gradient background */
  padding: 2em;
 }
