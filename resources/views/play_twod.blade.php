@@ -211,9 +211,6 @@
                 });
                 return; // Exit the function to prevent further changes 
             }
-
-
-
             // Decrease the user balance by the total
             userBalance -= total;
 
@@ -223,7 +220,6 @@
 
             document.getElementById('totalAmount').value = total;
         }
-
         function getRandomColor() {
             const letters = '0123456789ABCDEF';
             let color = '#';

@@ -59,8 +59,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'App\Http\Co
 
 Route::get('/two-d-evening-number', [App\Http\Controllers\Admin\TwoDMorningController::class, 'EveningTwoD'])->name('eveningNumber');
 Route::get('/two-d-evening-winner', [App\Http\Controllers\Admin\TwoDMorningController::class, 'TwoDEveningWinner'])->name('eveningWinner');
-//SendToAccBalance update 
-// Route::put('/send-to-acc-balance', [App\Http\Controllers\Admin\TwoDMorningController::class, 'SendToAccBalanceUpdate'])->name('sendToAccBalance');
 
 Route::get('profile/fill_money', [ProfileController::class, 'fillmoney']);
 });
