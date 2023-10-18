@@ -72,6 +72,8 @@ return [
 
     //'timezone' => 'UTC',
     'timezone' => 'Asia/Yangon',
+    //'timezone' => '+06:30',
+
 
 
     /*

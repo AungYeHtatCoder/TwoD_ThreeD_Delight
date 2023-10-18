@@ -271,33 +271,33 @@
       </a>
      </li>
      <li class="nav-item ">
-      <a class="nav-link text-white " href="../../pages/applications/kanban.html">
+      <a class="nav-link text-white " href="{{ route('admin.tow-d-win-number.index') }}">
        <span class="sidenav-mini-icon"> K </span>
-       <span class="sidenav-normal  ms-2  ps-1"> Kanban </span>
+       <span class="sidenav-normal  ms-2  ps-1"> 2D Prize No Create </span>
       </a>
      </li>
      <li class="nav-item ">
-      <a class="nav-link text-white " href="../../pages/applications/wizard.html">
-       <span class="sidenav-mini-icon"> W </span>
-       <span class="sidenav-normal  ms-2  ps-1"> Wizard </span>
+      <a class="nav-link text-white " href="{{ route('admin.tow-d-morning-number.index') }}">
+       <span class="sidenav-mini-icon"> MS </span>
+       <span class="sidenav-normal  ms-2  ps-1"> 2D MorningSession </span>
       </a>
      </li>
      <li class="nav-item ">
-      <a class="nav-link text-white " href="../../pages/applications/datatables.html">
-       <span class="sidenav-mini-icon"> D </span>
-       <span class="sidenav-normal  ms-2  ps-1"> DataTables </span>
+      <a class="nav-link text-white " href="{{ route('admin.morningWinner') }}">
+       <span class="sidenav-mini-icon"> MW </span>
+       <span class="sidenav-normal  ms-2  ps-1"> 2D MorningWinner </span>
       </a>
      </li>
      <li class="nav-item ">
-      <a class="nav-link text-white " href="../../pages/applications/calendar.html">
-       <span class="sidenav-mini-icon"> C </span>
-       <span class="sidenav-normal  ms-2  ps-1"> Calendar </span>
+      <a class="nav-link text-white " href="{{ route('admin.eveningNumber') }}">
+       <span class="sidenav-mini-icon"> ES </span>
+       <span class="sidenav-normal  ms-2  ps-1"> 2D EveningSession </span>
       </a>
      </li>
      <li class="nav-item ">
-      <a class="nav-link text-white " href="../../pages/applications/stats.html">
-       <span class="sidenav-mini-icon"> S </span>
-       <span class="sidenav-normal  ms-2  ps-1"> Stats </span>
+      <a class="nav-link text-white " href="{{ route('admin.eveningWinner') }}">
+       <span class="sidenav-mini-icon"> EW </span>
+       <span class="sidenav-normal  ms-2  ps-1"> 2D EveningWinner </span>
       </a>
      </li>
      <li class="nav-item ">

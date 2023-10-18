@@ -12,6 +12,7 @@ class TwodWiner extends Model
     use HasFactory;
     protected $fillable = [
         'prize_no',
+        'session',
     ];
      public function users()
     {

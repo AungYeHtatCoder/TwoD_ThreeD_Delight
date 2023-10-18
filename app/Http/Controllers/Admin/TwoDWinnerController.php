@@ -11,9 +11,17 @@ class TwoDWinnerController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function __construct()
+    {
+        date_default_timezone_set('Asia/Yangon');
+    }
     public function index()
     {
-        //
+        
+         $morningData = TwodWiner::where('session', 'morning')->first();
+        $eveningData = TwodWiner::where('session', 'evening')->first();
+
+        return view('admin.two_d.prize_index', compact('morningData', 'eveningData'));
     }
 
     /**
@@ -30,8 +38,11 @@ class TwoDWinnerController extends Controller
     public function store(Request $request)
     {
         //
+    $currentSession = date('H') < 12 ? 'morning' : 'evening';  // before 1 pm is morning
+
         TwodWiner::create([
             'prize_no' => $request->prize_no,
+            'session' => $currentSession,
         ]);
 
         return redirect()->back()->with('success', 'Two Digit Lottery Winner Added Successfully');

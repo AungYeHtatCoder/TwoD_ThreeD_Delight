@@ -1,5 +1,4 @@
 @extends('layouts.user_app')
-
 @section('user_styles')
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.min.css">
     <style>
