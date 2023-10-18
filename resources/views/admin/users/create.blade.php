@@ -162,8 +162,7 @@ $(document).ready(function() {
 
   $.ajax({
    type: 'POST',
-   url: '{{route('
-   admin.users.store ')}}',
+   url: '{{ route('admin.users.store') }}',
    data: formData,
    processData: false, // Important!
    contentType: false, //Important!

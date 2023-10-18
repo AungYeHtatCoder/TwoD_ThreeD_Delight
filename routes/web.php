@@ -30,6 +30,7 @@ use App\Http\Controllers\Admin\TwoDLotteryController;
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\User\WelcomeController::class, 'index'])->name('welcome');
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'App\Http\Controllers\Admin', 'middleware' => ['auth']], function () {
     // Permissions
     Route::delete('permissions/destroy', [PermissionController::class, 'massDestroy'])->name('permissions.massDestroy');
@@ -58,20 +59,5 @@ Route::get('/two-d-evening-winner', [App\Http\Controllers\Admin\TwoDMorningContr
 //SendToAccBalance update 
 // Route::put('/send-to-acc-balance', [App\Http\Controllers\Admin\TwoDMorningController::class, 'SendToAccBalanceUpdate'])->name('sendToAccBalance');
 
-<<<<<<< HEAD
 Route::get('profile/fill_money', [ProfileController::class, 'fillmoney']);
-
-
-
-
-
-=======
-});
-
-Route::get('/', [App\Http\Controllers\User\WelcomeController::class, 'index'])->name('welcome');
-Route::group(['prefix' => 'user', 'as' => 'user.', 'namespace' => 'App\Http\Controllers\User', 'middleware' => ['auth']], function () {
-    // welcome page
-    
-    
->>>>>>> c5091c15199fc0eda3b3da13553a5d6908e50096
 });

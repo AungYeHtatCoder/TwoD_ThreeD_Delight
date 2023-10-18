@@ -255,18 +255,19 @@
     </ul>
    </div>
   </li>
-  <!-- <li class="nav-item">
+  {{-- lottery --}}
+   <li class="nav-item">
    <a data-bs-toggle="collapse" href="#applicationsExamples" class="nav-link text-white "
     aria-controls="applicationsExamples" role="button" aria-expanded="false">
     <i class="material-icons-round {% if page.brand == 'RTL' %}ms-2{% else %} me-2{% endif %}">apps</i>
-    <span class="nav-link-text ms-2 ps-1">Applications</span>
+    <span class="nav-link-text ms-2 ps-1">2D Management</span>
    </a>
    <div class="collapse " id="applicationsExamples">
     <ul class="nav ">
      <li class="nav-item ">
-      <a class="nav-link text-white " href="../../pages/applications/crm.html">
-       <span class="sidenav-mini-icon"> C </span>
-       <span class="sidenav-normal  ms-2  ps-1"> CRM </span>
+      <a class="nav-link text-white " href="{{ route('admin.twod-records.index')}}">
+       <span class="sidenav-mini-icon"> 2D | H </span>
+       <span class="sidenav-normal  ms-2  ps-1"> 2D History </span>
       </a>
      </li>
      <li class="nav-item ">
@@ -308,6 +309,8 @@
     </ul>
    </div>
   </li>
+  {{-- end lottery --}}
+  <!--
   <li class="nav-item">
    <a data-bs-toggle="collapse" href="#ecommerceExamples" class="nav-link text-white " aria-controls="ecommerceExamples"
     role="button" aria-expanded="false">

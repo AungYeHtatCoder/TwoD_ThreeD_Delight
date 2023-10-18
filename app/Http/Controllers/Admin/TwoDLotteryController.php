@@ -18,7 +18,7 @@ public function index()
 {
     $lotteries = Lottery::with('twoDigits')->get();
     $prize_no = TwodWiner::whereDate('created_at', Carbon::today())->orderBy('id', 'desc')->first();
-    return view('admin.two_d.index', compact('lotteries', 'prize_no'));
+    return view('admin.two_d.two_d_history', compact('lotteries', 'prize_no'));
 }
 
 
@@ -44,7 +44,9 @@ public function index()
      */
     public function show(string $id)
     {
-        //
+        $lottery = Lottery::with('twoDigits')->findOrFail($id);
+        $prize_no = TwodWiner::whereDate('created_at', Carbon::today())->orderBy('id', 'desc')->first();
+        return view('admin.two_d.two_history_show', compact('lottery', 'prize_no'));
     }
 
     /**

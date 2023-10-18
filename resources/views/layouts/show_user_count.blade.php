@@ -5,29 +5,43 @@
           <div class="row">
             <div class="col-md-4 position-relative">
               <div class="p-3 text-center">
-                <h1 class="text-gradient text-primary"><span id="state1" countTo="70">0</span>+</h1>
-                <h5 class="mt-3">Coded Elements</h5>
-                <p class="text-sm">From buttons, to inputs, navbars, alerts or cards, you are covered</p>
+                <h4 class="text-gradient text-primary">
+                  <span id="liveSet">{{ $data['live']['set'] }}</span>
+                </h4>
+                <h5 class="mt-3">Set Index</h5>
+                {{-- <p class="text-sm">From buttons, to inputs, navbars, alerts or cards, you are covered</p> --}}
               </div>
               <hr class="vertical dark">
             </div>
             <div class="col-md-4 position-relative">
               <div class="p-3 text-center">
-                <h1 class="text-gradient text-primary"> <span id="state2" countTo="15">0</span>+</h1>
-                <h5 class="mt-3">Design Blocks</h5>
-                <p class="text-sm">Mix the sections, change the colors and unleash your creativity</p>
+                <h4 class="text-gradient text-primary"> <span id="liveValue">{{ $data['live']['value'] }}</span></h4>
+                <h5 class="mt-3">Value</h5>
+                {{-- <p class="text-sm">Mix the sections, change the colors and unleash your creativity</p> --}}
               </div>
               <hr class="vertical dark">
             </div>
             <div class="col-md-4">
               <div class="p-3 text-center">
-                <h1 class="text-gradient text-primary" id="state3" countTo="4">0</h1>
-                <h5 class="mt-3">Pages</h5>
-                <p class="text-sm">Save 3-4 weeks of work when you use our pre-made pages for your website</p>
+                <h6 class="text-gradient text-primary">
+                  <span id="liveTime">{{ $data['live']['time'] }}</span>
+                </h6>
+                <h5 class="mt-3">RealTime</h5>
+                {{-- <p class="text-sm">Save 3-4 weeks of work when you use our pre-made pages for your website</p> --}}
               </div>
+              <hr class="vertical dark">
             </div>
+            {{-- <div class="col-md-3">
+              <div class="p-3 text-center">
+                <h6 class="text-gradient text-primary">
+                  <span id="liveTime">{{ $data['live']['time'] }}</span>
+                </h6>
+                <h5 class="mt-3">RealTime</h5>
+              </div>
+            </div> --}}
           </div>
         </div>
       </div>
     </div>
   </section>
+  

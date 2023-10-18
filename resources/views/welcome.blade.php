@@ -1,6 +1,9 @@
 @extends('layouts.user_app')
 
 @section('user_styles')
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.min.css">
     <style>
         /* .digit.selected {
             background-color: #007bff;
@@ -134,8 +137,6 @@
                                 <!-- or some other default value or message -->
                             @endif
                         </h5>
-
-
                         @foreach ($twoDigits->chunk(5) as $chunk)
                             <div class="row my-2 beauty">
                                 @foreach ($chunk as $digit)
@@ -154,34 +155,28 @@
                                     @else
                                         <div class="col-2 text-center digit disabled"
                                             style="background-color: {{ 'javascript:getRandomColor();' }}"
-                                            onclick="alert('This two digit\'s amount limit is full.')">
+                                            onclick="showLimitFullAlert()">
                                             {{ $digit->two_digit }}
                                         </div>
                                     @endif
                                 @endforeach
                             </div>
                         @endforeach
-
                         <form action="{{ route('admin.two-d-lotteries.store') }}" method="post">
                             @csrf
 
                             <input type="text" name="selected_digits" id="selected_digits" class="form-control">
 
                             <div id="amountInputs"></div>
-                            <!-- Add this right above your PlayNow & Close buttons in the modal-body -->
                             <div class="form-group mb-3">
                                 <label for="totalAmount">Total Amount</label>
                                 <input type="text" id="totalAmount" name="totalAmount" class="form-control" readonly>
-
-
-
                             </div>
                             <input type="hidden" name="user_id" value="{{ Auth::check() ? Auth::user()->id : 'default_value' }}">
 
-                            {{-- PlayNow & Close buttons --}}
                             <div class="modal-footer">
                                 <button type="submit" class="btn btn-primary">playNow</button>
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                {{-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> --}}
                             </div>
                         </form>
                     </div>
@@ -194,7 +189,18 @@
     </div>
 @endsection
 @section('user_scripts')
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.all.min.js"></script>
+
     <script>
+        function showLimitFullAlert() {
+    Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'This two digit\'s amount limit is full. - သတ်မှတ်ကြေးပြည့်သွား၍ ဤဂဏန်းကို သင်ထိုး၍ မရတော့ပါ။ '
+    });
+}
+
         function selectDigit(num, element) {
             const selectedInput = document.getElementById('selected_digits');
             const amountInputsDiv = document.getElementById('amountInputs');
@@ -241,9 +247,17 @@
 
             // Check if user balance is less than total amount
             if (userBalance < total) {
-                alert('Your balance is not enough to play two digit.');
-                return; // Exit the function to prevent further changes
-            }
+    //alert('Your balance is not enough to play two digit.');
+    Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Your balance is not enough to play two digit. - သင်၏လက်ကျန်ငွေ မလုံလောက်ပါ - ကျေးဇူးပြု၍ ငွေဖြည့်ပါ။',
+        footer: '<a href="{{ route('admin.profiles.index') }}" style="background-color: #007BFF; color: #FFFFFF; padding: 5px 10px; border-radius: 5px; text-decoration: none;">Fill Balance - ငွေဖြည့်သွင်းရန် နိုပ်ပါ </a>'
+    });
+    return; // Exit the function to prevent further changes 
+}
+
+
 
             // Decrease the user balance by the total
             userBalance -= total;
@@ -263,5 +277,116 @@
             }
             return color;
         }
+        // sweet alert
+        document.querySelector('form').addEventListener('submit', function(event) {
+    event.preventDefault(); // prevent the form from submitting immediately
+
+    Swal.fire({
+        title: 'Are you sure- ထိုးမှာလား ?',
+        text: 'You are about to submit your lottery choices.',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, submit it! - ထိုးမယ်!',
+        cancelButtonText: 'No, cancel! - မထိုးပါ!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // If the user clicked "Yes", submit the form
+            event.target.submit();
+        }
+    });
+});
+
+// store two digit lottery
+// document.querySelector('form').addEventListener('submit', function(event) {
+//     event.preventDefault(); // prevent the form from submitting immediately
+
+//     Swal.fire({
+//         title: 'Are you sure?',
+//         text: 'You are about to submit your lottery choices.',
+//         icon: 'warning',
+//         showCancelButton: true,
+//         confirmButtonText: 'Yes, submit it!',
+//         cancelButtonText: 'No, cancel!'
+//     }).then((result) => {
+//         if (result.isConfirmed) {
+//             // If the user clicked "Yes", send an AJAX request
+//             const formData = new FormData(event.target);
+//             fetch(event.target.action, {
+//                 method: 'POST',
+//                 body: formData,
+//                 headers: {
+//                     'X-Requested-With': 'XMLHttpRequest', // Indicates this is an AJAX request
+//                     'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content') // Add CSRF token for Laravel
+//                 }
+//             })
+//             .then(response => response.json()) // Parse the JSON response
+//             .then(data => {
+//                 if (data.success) {
+//                     Swal.fire('Success!', data.message, 'success');
+//                 } else {
+//                     Swal.fire('Error!', data.error, 'error');
+//                 }
+//             })
+//             .catch(error => {
+//                 Swal.fire('Oops!', 'Something went wrong. Please try again.', 'error');
+//             });
+//         }
+//     });
+// });
+
     </script>
+
+
+    <script>
+    $(document).ready(function() {
+        function fetchData() {
+            $.ajax({
+                url: "/",
+                type: "GET",
+                dataType: "json",
+                success: function(data) {
+                    // Update live data
+                    updateLiveData(data.live);
+
+                    // Update results
+                    updateResultsData(data.result);
+                }
+            });
+        }
+
+        function updateLiveData(liveData) {
+            // Helper function to update text and possibly animate the update
+            function updateAndAnimate(elementId, newValue) {
+                const element = $(elementId);
+                if (element.text() !== newValue) {
+                    element.text(newValue).addClass('activeUpdate');
+                    setTimeout(function() {
+                        element.removeClass('activeUpdate');
+                    }, 300);
+                }
+            }
+
+            updateAndAnimate("#liveSet", liveData.set);
+            updateAndAnimate("#liveValue", liveData.value);
+            $("#liveTime").text(liveData.time);  // Always update time
+        }
+
+        function updateResultsData(results) {
+            let resultsHtml = '';
+            results.forEach(function(result) {
+                resultsHtml += `
+                    <p>Set: ${result.set}</p>
+                    <p>Value: ${result.value}</p>
+                    <p>Open Time: ${result.open_time}</p>
+                    <hr>
+                `;
+            });
+
+            $("#resultsData").html(resultsHtml);
+        }
+
+        fetchData();  // Initial data fetch
+        setInterval(fetchData, 1000);  // Fetch data every 3 seconds
+    });
+</script>
 @endsection
