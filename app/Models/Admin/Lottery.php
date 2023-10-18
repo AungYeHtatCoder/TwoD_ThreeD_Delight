@@ -16,6 +16,7 @@ class Lottery extends Model
         'pay_amount',
         'total_amount',
         'user_id',
+        'session',
         'lottery_match_id'
     ];
         public function user()
