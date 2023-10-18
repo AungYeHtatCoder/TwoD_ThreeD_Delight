@@ -35,7 +35,7 @@
 }
 
 .digit {
- border: 3px solid gold;
+ border: 3px solid #7A316F;
  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
  padding: 10px 0;
  border-radius: 8px;
@@ -43,7 +43,7 @@
  font-weight: bold;
  transition: all 0.3s ease;
  cursor: pointer;
- margin: 0 1px;
+ margin: 0 5px;
  /* Spacing between digits */
 }
 
@@ -87,25 +87,30 @@
  padding: 2em;
 }
 
-    @keyframes goldAnimate {
-        0% {
-            border-color: #ffd700;
-        }
-        50% {
-            border-color: #ffcc00;
-        }
-        100% {
-            border-color: #ffdb58;
-        }
-    } */
-        /* General styles */
-        .beauty {
-            font-family: 'Arial', sans-serif;
-            /* Change as per your preference */
-            background: linear-gradient(45deg, #f3f4f6, #ddd);
-            /* Light gradient background */
-            padding: 2em;
-        }
+@keyframes goldAnimate {
+ 0% {
+  border-color: #ffd700;
+ }
+
+ 50% {
+  border-color: #ffcc00;
+ }
+
+ 100% {
+  border-color: #ffdb58;
+ }
+}
+
+*/
+
+/* General styles */
+.beauty {
+ font-family: 'Arial', sans-serif;
+ /* Change as per your preference */
+ background: linear-gradient(45deg, #22668D, #ddd);
+ /* Light gradient background */
+ padding: 2em;
+}
 
 .digit:hover {
  transform: translateY(-5px);
@@ -129,19 +134,26 @@
 @endsection
 @section('content')
 <div class="row align-items-center">
- <div class="col-lg-10 ms-auto">
+ <div class="col-lg-10 mx-auto">
   <div class="row justify-content-center">
-   <div class="col-md-12">
+   <div class="col-md-10">
     <div class="info">
      <div class="icon icon-sm">
       {{-- 1 --}}
      </div>
-     <h5 class="font-weight-bolder mt-3">Delight 2D
-      <span id="userBalance" data-balance="{{ Auth::user()->balance }}">{{ Auth::user()->balance }}</span>
-     </h5>
+     <div class="d-flex">
+      <h5 class="font-weight-bolder mt-3">Delight 2D
+       <span id="userBalance" data-balance="{{ Auth::user()->balance }}">{{ Auth::user()->balance }}</span>
+      </h5>
+      <div class="mt-3 ms-2">
+       <a href="{{ url('/user_profile') }}" class="btn btn-sm bg-gradient-primary btn-round mb-0 me-1 mt-md-0">Fill Balance</a>
+      </div>
 
+     </div>
+
+ <div class="row my-2 beauty">
      @foreach($twoDigits->chunk(5) as $chunk)
-     <div class="row my-2 beauty">
+    
       @foreach($chunk as $digit)
       @php
       $totalBetAmountForTwoDigit = DB::table('lottery_two_digit_pivot')
@@ -149,8 +161,9 @@
       ->sum('sub_amount');
       @endphp
 
-      @if($totalBetAmountForTwoDigit < 5000) <div class="col-2 text-center digit"
-       style="background-color: {{ 'javascript:getRandomColor();' }}"
+      @if($totalBetAmountForTwoDigit < 5000) 
+      <div class="col-2 mx-auto text-center digit"
+       style="background-color: {{ 'javascript:getRandomColor();' }};"
        onclick="selectDigit('{{ $digit->two_digit }}', this)">
        {{ $digit->two_digit }}
      </div>
@@ -161,26 +174,32 @@
      </div>
      @endif
      @endforeach
-    </div>
+   
     @endforeach
+</div>
 
     <form action="{{ route('admin.two-d-lotteries.store') }}" method="post">
      @csrf
-
-     <input type="text" name="selected_digits" id="selected_digits" class="form-control">
-
-     <div id="amountInputs"></div>
+     <div class="row">
+      <div class="col-md-6 mt-4">
+       <input type="text" name="selected_digits" id="selected_digits" class="form-control">
+       <div id="amountInputs"></div>
+      </div>
+      <div class="col-md-6">
+       <div class="form-group mb-3">
+        <label for="totalAmount">Total Amount</label>
+        <input type="text" id="totalAmount" name="totalAmount" class="form-control" readonly>
+       </div>
+       <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+       {{-- PlayNow & Close buttons --}}
+       <div class="modal-footer">
+        <button type="submit" class="btn bg-gradient-primary mx-3">playNow</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+       </div>
+      </div>
+     </div>
      <!-- Add this right above your PlayNow & Close buttons in the modal-body -->
-     <div class="form-group mb-3">
-      <label for="totalAmount">Total Amount</label>
-      <input type="text" id="totalAmount" name="totalAmount" class="form-control" readonly>
-     </div>
-     <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
-     {{-- PlayNow & Close buttons --}}
-     <div class="modal-footer">
-      <button type="submit" class="btn btn-primary">playNow</button>
-      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-     </div>
+
     </form>
    </div>
   </div>
@@ -239,17 +258,18 @@ function updateTotalAmount() {
  const userBalanceSpan = document.getElementById('userBalance');
  let userBalance = Number(userBalanceSpan.getAttribute('data-balance'));
 
-            // Check if user balance is less than total amount
-            if (userBalance < total) {
-    //alert('Your balance is not enough to play two digit.');
-    Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Your balance is not enough to play two digit. - သင်၏လက်ကျန်ငွေ မလုံလောက်ပါ - ကျေးဇူးပြု၍ ငွေဖြည့်ပါ။',
-        footer: '<a href="{{ route('admin.profiles.index') }}" style="background-color: #007BFF; color: #FFFFFF; padding: 5px 10px; border-radius: 5px; text-decoration: none;">Fill Balance - ငွေဖြည့်သွင်းရန် နိုပ်ပါ </a>'
-    });
-    return; // Exit the function to prevent further changes 
-}
+ // Check if user balance is less than total amount
+ if (userBalance < total) {
+  //alert('Your balance is not enough to play two digit.');
+  Swal.fire({
+   icon: 'error',
+   title: 'Oops...',
+   text: 'Your balance is not enough to play two digit. - သင်၏လက်ကျန်ငွေ မလုံလောက်ပါ - ကျေးဇူးပြု၍ ငွေဖြည့်ပါ။',
+   footer: `<a href=
+   "{{ route('admin.profiles.index') }}" style="background-color: #007BFF; color: #FFFFFF; padding: 5px 10px; border-radius: 5px; text-decoration: none;">Fill Balance - ငွေဖြည့်သွင်းရန် နိုပ်ပါ </a>`
+  });
+  return; // Exit the function to prevent further changes 
+ }
 
 
 
@@ -263,83 +283,83 @@ function updateTotalAmount() {
  document.getElementById('totalAmount').value = total;
 }
 
-        function getRandomColor() {
-            const letters = '0123456789ABCDEF';
-            let color = '#';
-            for (let i = 0; i < 6; i++) {
-                color += letters[Math.floor(Math.random() * 16)];
-            }
-            return color;
-        }
-        // sweet alert
-        document.querySelector('form').addEventListener('submit', function(event) {
-    event.preventDefault(); // prevent the form from submitting immediately
+function getRandomColor() {
+ const letters = '0123456789ABCDEF';
+ let color = '#';
+ for (let i = 0; i < 6; i++) {
+  color += letters[Math.floor(Math.random() * 16)];
+ }
+ return color;
+}
+// sweet alert
+document.querySelector('form').addEventListener('submit', function(event) {
+ event.preventDefault(); // prevent the form from submitting immediately
 
-    Swal.fire({
-        title: 'Are you sure- ထိုးမှာလား ?',
-        text: 'You are about to submit your lottery choices.',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Yes, submit it! - ထိုးမယ်!',
-        cancelButtonText: 'No, cancel! - မထိုးပါ!'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            // If the user clicked "Yes", submit the form
-            event.target.submit();
-        }
-    });
+ Swal.fire({
+  title: 'Are you sure- ထိုးမှာလား ?',
+  text: 'You are about to submit your lottery choices.',
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonText: 'Yes, submit it! - ထိုးမယ်!',
+  cancelButtonText: 'No, cancel! - မထိုးပါ!'
+ }).then((result) => {
+  if (result.isConfirmed) {
+   // If the user clicked "Yes", submit the form
+   event.target.submit();
+  }
+ });
 });
-    </script>
-    <script>
-    $(document).ready(function() {
-        function fetchData() {
-            $.ajax({
-                url: "/",
-                type: "GET",
-                dataType: "json",
-                success: function(data) {
-                    // Update live data
-                    updateLiveData(data.live);
+</script>
+<script>
+$(document).ready(function() {
+ function fetchData() {
+  $.ajax({
+   url: "/",
+   type: "GET",
+   dataType: "json",
+   success: function(data) {
+    // Update live data
+    updateLiveData(data.live);
 
-                    // Update results
-                    updateResultsData(data.result);
-                }
-            });
-        }
+    // Update results
+    updateResultsData(data.result);
+   }
+  });
+ }
 
-        function updateLiveData(liveData) {
-            // Helper function to update text and possibly animate the update
-            function updateAndAnimate(elementId, newValue) {
-                const element = $(elementId);
-                if (element.text() !== newValue) {
-                    element.text(newValue).addClass('activeUpdate');
-                    setTimeout(function() {
-                        element.removeClass('activeUpdate');
-                    }, 300);
-                }
-            }
+ function updateLiveData(liveData) {
+  // Helper function to update text and possibly animate the update
+  function updateAndAnimate(elementId, newValue) {
+   const element = $(elementId);
+   if (element.text() !== newValue) {
+    element.text(newValue).addClass('activeUpdate');
+    setTimeout(function() {
+     element.removeClass('activeUpdate');
+    }, 300);
+   }
+  }
 
-            updateAndAnimate("#liveSet", liveData.set);
-            updateAndAnimate("#liveValue", liveData.value);
-            $("#liveTime").text(liveData.time);  // Always update time
-        }
+  updateAndAnimate("#liveSet", liveData.set);
+  updateAndAnimate("#liveValue", liveData.value);
+  $("#liveTime").text(liveData.time); // Always update time
+ }
 
-        function updateResultsData(results) {
-            let resultsHtml = '';
-            results.forEach(function(result) {
-                resultsHtml += `
+ function updateResultsData(results) {
+  let resultsHtml = '';
+  results.forEach(function(result) {
+   resultsHtml += `
                     <p>Set: ${result.set}</p>
                     <p>Value: ${result.value}</p>
                     <p>Open Time: ${result.open_time}</p>
                     <hr>
                 `;
-            });
+  });
 
-            $("#resultsData").html(resultsHtml);
-        }
+  $("#resultsData").html(resultsHtml);
+ }
 
-        fetchData();  // Initial data fetch
-        setInterval(fetchData, 1000);  // Fetch data every 3 seconds
-    });
+ fetchData(); // Initial data fetch
+ setInterval(fetchData, 1000); // Fetch data every 3 seconds
+});
 </script>
 @endsection
