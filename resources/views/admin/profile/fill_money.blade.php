@@ -78,7 +78,7 @@
        <form role="form" class="text-start" action="">
         <div class="custom-form-group row">
          <label for="title">ဖုန်းနံပါတ်များ</label>
-         <input type="text" id="title" name="title" class="form-control">
+         <input type="text" id="title" name="title" class="form-control" value="">
         </div>
         <div class="custom-form-group row">
          <h5 class="mt-3">ငွေဖြည့်နည်း</h5>

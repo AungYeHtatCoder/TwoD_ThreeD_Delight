@@ -60,7 +60,5 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'App\Http\Co
     Route::get('/two-d-morning-winner', [App\Http\Controllers\Admin\TwoDMorningController::class, 'TwoDMorningWinner'])->name('morningWinner');
     Route::get('/two-d-evening-number', [App\Http\Controllers\Admin\TwoDMorningController::class, 'EveningTwoD'])->name('eveningNumber');
         Route::get('/two-d-evening-winner', [App\Http\Controllers\Admin\TwoDMorningController::class, 'TwoDEveningWinner'])->name('eveningWinner');
-
-
     Route::get('profile/fill_money', [ProfileController::class, 'fillmoney']);
 });

@@ -37,6 +37,9 @@ class User extends Authenticatable
         'phone',
         'address',
         'kpay_no',
+        'cbpay_no',
+        'wavepay_no',
+        'ayapay_no',
         'balance',
         
     ];
