@@ -1,5 +1,6 @@
 @extends('layouts.admin_app')
 @section('styles')
+
     <style>
         .image-container {
             position: absolute;
@@ -41,6 +42,63 @@
                                 @method('PUT')
                                 <div class="card-body pt-0">
 
+
+<div class="container-fluid my-3 py-3">
+ <div class="row mb-5">
+  <div class="col-lg-3 position-sticky col-md-6">
+   <div class="card  top-1 mb-3">
+    <div class="card-header mx-4 p-3 text-center">
+     <div class="avatar avatar-xl position-relative">
+      <img src="{{ asset('admin_app/assets/img/team-3.jpg') }}" alt="bruce" class="w-100 rounded-circle shadow-sm">
+     </div>
+    </div>
+    <div class="card-body pt-0 p-3 text-center">
+     <div class="input-group input-group-outline">
+      <input type="file" class="form-control">
+     </div>
+     <!-- <span class="text-xs">Freelance Payment</span> -->
+     <hr class="horizontal dark mt-2">
+     <button class="btn bg-gradient-dark btn-sm float-center">Upload
+     </button>
+    </div>
+   </div>
+   <div class="card top-1">
+    <div class="card-header mx-4 p-3 text-center">
+     <div class="icon icon-shape icon-lg bg-gradient-primary shadow text-center border-radius-lg">
+      <i class="material-icons opacity-10">account_balance_wallet</i>
+     </div>
+    </div>
+    <div class="card-body pt-0 p-3 text-center">
+     <h6 class="text-center mb-0">Total Balance</h6>
+     <!-- <span class="text-xs">Freelance Payment</span> -->
+     <hr class="horizontal dark my-3">
+     <h5 class="mb-0">$455.00</h5>
+    </div>
+   </div>
+
+  </div>
+  <div class="col-lg-9 mt-lg-0 mt-4">
+   <!-- Card Profile -->
+   <div class="card card-body" id="profile">
+    <div class="row justify-content-center align-items-center">
+     <div class="col-sm-auto col-4">
+      <div class="avatar avatar-xl position-relative">
+       <img src="{{ asset('admin_app/assets/img/team-3.jpg') }}" alt="bruce" class="w-100 rounded-circle shadow-sm">
+      </div>
+     </div>
+     <div class="col-sm-auto col-8 my-auto">
+      <div class="h-100">
+       <h5 class="mb-1 font-weight-bolder">
+        Richard Davis
+       </h5>
+       <p class="mb-0 font-weight-normal text-sm">
+        CEO / Co-Founder
+       </p>
+      </div>
+     </div>
+     <!-- <div class="col-sm-auto ms-sm-auto mt-sm-0 mt-3 d-flex">
+      <a class="btn btn-icon btn-3 btn-primary" href="{{ url('/admin/profile/fill_money') }}">
+
                                     <div class="row">
                                         <div class="input-group input-group-static">
                                             <label>K Pay</label>
@@ -74,6 +132,7 @@
                                     </button>
                                 </div>
                             </form>
+
 
                 </div>
             </div>

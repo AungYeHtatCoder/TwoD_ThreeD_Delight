@@ -5,10 +5,10 @@
  <!-- Navbar -->
  @include('layouts.user_navbar')
 
- <section style="padding-top: 150px;">
+ <section style="padding-top: 100px;">
   <div class="container">
    <div class="row">
-    <div class="col-lg-6 mx-auto">
+    <div class="col-lg-6 col-sm-12 mx-auto">
      <div class="bg-gradient-primary shadow-primary border-radius-lg py-2 pe-1">
       <h4 class="text-white font-weight-bolder text-center mb-2">Fill Money</h4>
      </div>
@@ -49,9 +49,9 @@
         </div>
 
         <div class="mt-4 d-flex justify-content-center mb-2">
-         <button class="btn bg-gradient-primary btn-lg">ငွေဖြည့်မည်
+         <button class="btn bg-gradient-primary btn-sm">ငွေဖြည့်မည်
          </button>
-         <a href="{{ url('/user_profile') }}" class="btn bg-gradient-secondary btn-lg ms-3">မလုပ်တော့ပါ
+         <a href="{{ url('/user_profile') }}" class="btn bg-gradient-secondary btn-sm ms-3">မလုပ်တော့ပါ
          </a>
         </div>
        </div>
