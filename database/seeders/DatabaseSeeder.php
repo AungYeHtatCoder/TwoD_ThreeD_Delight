@@ -26,6 +26,8 @@ class DatabaseSeeder extends Seeder
             RoleUserTableSeeder::class,
             MatchTableSeeder::class,
             TwoDigitsTableSeeder::class,
+            TwoDLotteryPlaySeeder::class,
+            
         ]);
     }
 }

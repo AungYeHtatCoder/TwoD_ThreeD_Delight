@@ -148,6 +148,7 @@ class ProfileController extends Controller
         $user = User::find(Auth::user()->id);
 
         $user->update([
+            'name' => $request->name, // 'name' => $request->name,
             'phone' => $request->phone,
             'address' => $request->address
         ]);
@@ -162,14 +163,17 @@ class ProfileController extends Controller
     public function KpayNoChange(Request $request)
     {
         //dd($request->all());
-        $request->validate([
-            'kpay_no' => 'required',
-        ]);
+        // $request->validate([
+        //     'kpay_no' => 'required',
+        // ]);
 
         $user = User::find(Auth::user()->id);
 
         $user->update([
             'kpay_no' => $request->kpay_no,
+            'cbpay_no' => $request->cbpay_no,
+            'wavepay_no' => $request->wavepay_no,
+            'ayapay_no' => $request->ayapay_no,
         ]);
 
         if (auth()->user()->hasRole('Admin')) {
