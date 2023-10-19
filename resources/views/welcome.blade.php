@@ -1,6 +1,7 @@
 @extends('layouts.user_app')
 
 @section('user_styles')
+
     
 @endsection
 
