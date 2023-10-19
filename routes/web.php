@@ -34,6 +34,11 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/', [App\Http\Controllers\User\WelcomeController::class, 'index'])->name('welcome');
 Route::get('/user_profile', [App\Http\Controllers\User\WelcomeController::class, 'userProfile']);
 Route::get('/user_fillmoney', [App\Http\Controllers\User\WelcomeController::class, 'userFillMoney']);
+Route::get('/user_login', [App\Http\Controllers\User\WelcomeController::class, 'userLogin']);
+Route::get('/user_register', [App\Http\Controllers\User\WelcomeController::class, 'userRegister']);
+
+
+
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'App\Http\Controllers\Admin', 'middleware' => ['auth']], function () {
     // Permissions
@@ -59,7 +64,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'App\Http\Co
     Route::resource('tow-d-morning-number', TwoDMorningController::class);
     Route::get('/two-d-morning-winner', [App\Http\Controllers\Admin\TwoDMorningController::class, 'TwoDMorningWinner'])->name('morningWinner');
     Route::get('/two-d-evening-number', [App\Http\Controllers\Admin\TwoDMorningController::class, 'EveningTwoD'])->name('eveningNumber');
-        Route::get('/two-d-evening-winner', [App\Http\Controllers\Admin\TwoDMorningController::class, 'TwoDEveningWinner'])->name('eveningWinner');
+    Route::get('/two-d-evening-winner', [App\Http\Controllers\Admin\TwoDMorningController::class, 'TwoDEveningWinner'])->name('eveningWinner');
 
 
     Route::get('profile/fill_money', [ProfileController::class, 'fillmoney']);

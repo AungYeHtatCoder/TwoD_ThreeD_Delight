@@ -1,18 +1,18 @@
 @extends('layouts.admin_app')
 @section('styles')
 <style>
-.image-container {
- position: absolute;
- top: 0;
- left: 0;
-}
+ .image-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+ }
 
-.image {
- max-width: 20%;
- height: auto;
- opacity: 0.8;
- /* Adjust the opacity as needed */
-}
+ .image {
+  max-width: 20%;
+  height: auto;
+  opacity: 0.8;
+  /* Adjust the opacity as needed */
+ }
 </style>
 
 
@@ -21,8 +21,24 @@
 
 <div class="container-fluid my-3 py-3">
  <div class="row mb-5">
-  <div class="col-lg-3 col-md-6">
-   <div class="card position-sticky top-1">
+  <div class="col-lg-3 position-sticky col-md-6">
+   <div class="card  top-1 mb-3">
+    <div class="card-header mx-4 p-3 text-center">
+     <div class="avatar avatar-xl position-relative">
+      <img src="{{ asset('admin_app/assets/img/team-3.jpg') }}" alt="bruce" class="w-100 rounded-circle shadow-sm">
+     </div>
+    </div>
+    <div class="card-body pt-0 p-3 text-center">
+     <div class="input-group input-group-outline">
+      <input type="file" class="form-control">
+     </div>
+     <!-- <span class="text-xs">Freelance Payment</span> -->
+     <hr class="horizontal dark mt-2">
+     <button class="btn bg-gradient-dark btn-sm float-center">Upload
+     </button>
+    </div>
+   </div>
+   <div class="card top-1">
     <div class="card-header mx-4 p-3 text-center">
      <div class="icon icon-shape icon-lg bg-gradient-primary shadow text-center border-radius-lg">
       <i class="material-icons opacity-10">account_balance_wallet</i>
@@ -35,6 +51,7 @@
      <h5 class="mb-0">$455.00</h5>
     </div>
    </div>
+
   </div>
   <div class="col-lg-9 mt-lg-0 mt-4">
    <!-- Card Profile -->
