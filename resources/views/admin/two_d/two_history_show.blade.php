@@ -7,7 +7,14 @@
                 <div class="card-header pb-0">
                     <div class="d-lg-flex">
                         <div>
-                            <h5 class="mb-0">2D History Detail Dashboards</h5>
+                            <h5 class="mb-0">2D History Detail | {{ $lottery->user->name }} - Dashboards
+                                <span>
+                                    <button type="button" class="btn btn-success">
+                                        <span>Account Balance</span>
+                                        <span class="badge badge-primary">{{ $lottery->user->balance }}</span>
+                                    </button>
+                                </span>
+                            </h5>
 
                         </div>
                         <div class="ms-auto my-auto mt-lg-0 mt-4">
@@ -28,11 +35,10 @@
                     <h6>Two Digits &nbsp; &nbsp; &nbsp; &nbsp;
                         <span>{{ $lottery->user->name }} ထိုးထားသော ဂဏန်းများ </span>
                     </h6>
-                    <table class="table">
+                    <table class="table table-flush">
                         <thead>
                             <tr>
-                                <th>ID</th>
-                                {{-- <th>Value (or any other field)</th> --}}
+                                <th>2D</th>
                                 <th>Sub Amount</th>
                                 <th>Date</th>
                                 <th>Prize</th>
@@ -47,16 +53,16 @@
                                         <span
                                             class="badge bg-gradient-info">{{ $lottery->created_at->format('d-m-Y (l) (h:i a)') }}</span>
                                     </td>
-                                    @if($prize_no)
-                                    <td></td>
+                                    @if ($prize_no)
+                                        <td></td>
                                     @else
-                                    <td>
-                                        @if ($twoDigit->two_digit == $prize_no)
-                                            <span class="badge bg-gradient-success">Win</span>
-                                        @else
-                                            <span class="badge bg-gradient-danger">Lose</span>
-                                        @endif
-                                    </td>
+                                        <td>
+                                            @if ($twoDigit->two_digit == $prize_no)
+                                                <span class="badge bg-gradient-success">Win</span>
+                                            @else
+                                                <span class="badge bg-gradient-danger">Lose</span>
+                                            @endif
+                                        </td>
                                     @endif
                                 </tr>
                             @endforeach

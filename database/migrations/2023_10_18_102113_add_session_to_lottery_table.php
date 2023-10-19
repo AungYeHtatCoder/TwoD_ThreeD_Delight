@@ -11,12 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('twod_winers', function (Blueprint $table) {
-            $table->id();
-            $table->string('prize_no')->default('0');
-            $table->enum('session', ['morning', 'evening']); 
-            $table->timestamps();
-        });
+        Schema::table('lotteries', function (Blueprint $table) {
+        $table->enum('session', ['morning', 'evening'])->after('user_id'); // 'after' is optional but places the column after user_id for readability
+    });
     }
 
     /**
@@ -24,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('twod_winers');
+         Schema::table('lotteries', function (Blueprint $table) {
+        $table->dropColumn('session');
+    });
     }
 };
