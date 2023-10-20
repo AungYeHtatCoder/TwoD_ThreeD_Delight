@@ -26,7 +26,7 @@
                     <a href="{{ url('/user_register') }}" class="dropdown-item border-radius-md">
                       <span class="ps-3">Register</span>
                     </a>
-                    <a href="{{ url('/user_login') }}" class="dropdown-item border-radius-md">
+                    <a href="{{ route('login') }}" class="dropdown-item border-radius-md">
                       <span class="ps-3">Log In</span>
                     </a>
                     <a href="../../pages/author.html" class="dropdown-item border-radius-md">
