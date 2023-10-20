@@ -78,7 +78,7 @@
        <form role="form" class="text-start" action="">
         <div class="custom-form-group row">
          <label for="title">ဖုန်းနံပါတ်များ</label>
-         <input type="text" id="title" name="title" class="form-control" value="">
+         <input type="text" id="title" name="title" class="form-control" value="{{ Auth::user()->kpay_no }}">
         </div>
         <div class="custom-form-group row">
          <h5 class="mt-3">ငွေဖြည့်နည်း</h5>
@@ -99,7 +99,7 @@
         </div>
         <div class="custom-form-group row">
          <label for="title">လုပ်ငန်းစဉ်အမှတ် နောက်ဆုံး ၆ လုံးကိုဖြည့်ပါ</label>
-         <input type="text" id="title" name="title" class="form-control">
+         <input type="text" id="title" name="six_digit" class="form-control">
         </div>
         <div class="custom-form-group d-flex justify-content-center">
          <button class="btn btn-primary" type="button">ငွေဖြည့်မည်</button>

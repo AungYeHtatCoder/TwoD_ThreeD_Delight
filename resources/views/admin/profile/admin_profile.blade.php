@@ -249,7 +249,7 @@
                                     </div>
                                     <hr class="dark horizontal my-0">
                                     <div class="card-footer p-3">
-                                        <a href="{{ url('/admin/profile/fill_money') }}"
+                                        <a href="{{ route('admin.kpay_fill_money') }}"
                                             class="text-primary text-sm icon-move-right my-auto">Fill
                                             Money
                                             <i class="fas fa-arrow-right text-xs ms-1" aria-hidden="true"></i>
